@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Royal Foxnuts - Coming Soon</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      background: linear-gradient(to right, #fff7eb, #ffe0b2);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      z-index: 2;
+      position: relative;
+    }
+
+    img.logo {
+      max-width: 150px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin: 0 0 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    #countdown {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
+
+    form input[type="email"] {
+      padding: 10px;
+      font-size: 1rem;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    form button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #ff9800;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: #e68900;
+    }
+
+    /* === Cartoon Fox Animation === */
+    .fox {
+      position: absolute;
+      bottom: 50px;
+      left: -200px;
+      width: 120px;
+      animation: foxEnter 5s ease-in-out forwards;
+      z-index: 1;
+    }
+
+    @keyframes foxEnter {
+      0% { left: -200px; }
+      50% { left: 50%; transform: translateX(-50%) scale(1.1); }
+      100% { left: 50%; transform: translateX(-50%) scale(1); }
+    }
+
+    .foxnut {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      animation: bounce 2s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -40px); }
+    }
+
+    .moto {
+      position: absolute;
+      top: 30%;
+      font-size: 1.5rem;
+      color: #2e2e2e;
+      animation: fadeInMoto 4s ease-in-out 3s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInMoto {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Optional background music -->
+ 
+  <!-- Animation elements -->
+ 
+  
+  <div class="moto">Pure & Healthy – The Royal Way</div>
+
+  <div class="overlay">
+    <!-- Logo -->
+    <img src="logo.png" alt="Royal Foxnuts Logo" class="logo" />
+    <h1>Royal Foxnuts</h1>
+    <p>Our delicious Makhana is launching soon!</p>
+
+    <!-- Countdown -->
+    <div id="countdown">Loading countdown...</div>
+
+    <!-- Email Form -->
+    <form onsubmit="subscribeEmail(event)">
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Notify Me</button>
+    </form>
+  </div>
+
+  <script>
+    // Countdown Logic
+    const targetDate = new Date("2025-08-01T00:00:00").getTime();
+    const countdownElement = document.getElementById("countdown");
+
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        clearInterval(interval);
+        countdownElement.innerHTML = "We’re live now!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
+    }, 1000);
+
+    // Dummy Subscribe
+    function subscribeEmail(event) {
+      event.preventDefault();
+      alert("Thanks for subscribing!");
+      event.target.reset();
+    }
+  </script>
+
+</body>
+</html>
